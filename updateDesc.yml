@@ -1,0 +1,35 @@
+---
+- name: Dell OS10 
+  hosts: 10.3.3.19
+  gather_facts: false
+  collections:
+    - dellemc.os10
+  tasks:
+    - name: Description Update Dell OS10
+      dellos10_config:
+        commands:
+          - interface ethernet 1/1/31
+          - description <<LTMANC05U30NXPOCN1_19.21_A_P2>>
+          - exit
+          - interface ethernet 1/1/32
+          - description <<LTMANC05U30NXPOCN2_19.22_B_P2>>
+          - exit 
+          - interface ethernet 1/1/33
+          - description <<LTMANC05U30NXPOCN3_19.23_C_P2>>
+          - exit
+          - interface ethernet 1/1/34
+          - description <<LTMANC05U30NXPOCN4_19.24_D_P2>>
+          - exit
+          - interface ethernet 1/1/35
+          - description <<LTMANC05U30NXPOCN1_19.21_A_P4>>
+          - exit
+          - interface ethernet 1/1/36
+          - description <<LTMANC05U30NXPOCN2_19.22_B_P4>>
+          - exit
+          - interface ethernet 1/1/37
+          - description <<LTMANC05U30NXPOCN3_19.23_C_P4>>
+          - exit
+          - interface ethernet 1/1/38
+          - description <<LTMANC05U30NXPOCN4_19.24_D_P4>>
+          - exit
+          - write memory

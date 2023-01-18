@@ -1,0 +1,13 @@
+---
+- name: Dell OS10 
+  hosts: test
+  gather_facts: false
+  collections:
+    - dellemc.os10
+  tasks:
+    - name: Description Update Dell OS10
+      dellos10_config:
+        commands:
+          - no username admin
+          - exit
+          - write memory

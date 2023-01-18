@@ -1,0 +1,11 @@
+---
+- name: Update Banner message on Dell EMC OS10
+  hosts: 10.3.3.19
+  gather_facts: false
+  tasks:
+   - name: Login Banner Update
+     dellos10_config: 
+      commands: 
+       - banner login % 
+         Test banner %
+

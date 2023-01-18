@@ -1,0 +1,28 @@
+---
+- name: Dell OS10 VLan Creation 
+  hosts: LeafPOW
+  gather_facts: false
+  collections:
+    - dellemc.os10
+  tasks:
+    - name: VLan Creation vlan119
+      dellos10_config:
+        commands:
+          - interface vlan 119
+          - description <<Citrix_Data_VDI_VLAN>>
+          - no shutdown
+          - ip vrf forwarding DCLAN
+          - exit
+          - interface port-channel 2
+          - switchport trunk allowed vlan 101-114,117-119
+          - exit
+          - interface range ethernet1/1/41-1/1/43
+          - description <<Citrix-VM_Data>>
+          - shutdown
+          - switchport mode trunk
+          - switchport trunk allowed vlan 119
+          - mtu 9216
+          - flowcontrol receive on
+          - exit
+          - exit
+          - write memory

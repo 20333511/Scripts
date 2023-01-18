@@ -1,0 +1,29 @@
+---
+- name: Dell OS10 VLan Creation 
+  hosts: 10.2.3.16
+  gather_facts: false
+  collections:
+    - dellemc.os10
+  tasks:
+    - name: VLan Creation vlan119
+      dellos10_config:
+        commands:
+          - interface vlan 119
+          - description <<Citrix_Data_VDI_VLAN>>
+          - no shutdown
+          - ip vrf forwarding DCLAN
+          - ip address 10.2.29.2/24
+          - ip helper-address 10.2.23.21
+          - vrrp-group 119
+          - priority 200
+          - virtual-address 10.2.29.1
+          - exit
+          - exit
+          - interface port-channel 1
+          - switchport trunk allowed vlan 101-114,117-119
+          - exit
+          - interface ethernet1/1/5
+          - switchport trunk allowed vlan 101-114,117-119
+          - exit
+          - exit
+          - write memory
